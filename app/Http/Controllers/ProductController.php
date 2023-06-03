@@ -16,6 +16,12 @@ class ProductController extends Controller
 
     public function store (Request $request)
     {
+        $this->validate($request, [
+           'name' => 'required|min:3|string',
+           'price' => 'required|numeric',
+           'image' => 'required',
+           'shop_id' => 'required|numeric',
+        ]);
         Product::createProduct($request);
         return redirect()->back()->with('message', 'Product created successfully');
     }
