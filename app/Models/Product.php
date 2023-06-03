@@ -30,4 +30,24 @@ class Product extends Model
         self::$product->shop_id = $request->shop_id;
         self::$product->save();
     }
+
+    public static function updateProduct($request, $id)
+    {
+        self::$product = Product::find($id);
+        if ($request->file('image'))
+        {
+            if (file_exists(self::$product->image))
+            {
+                unlink(self::$product->image);
+            }
+            self::$imageUrl = self::getImageUrl($request);
+        } else {
+            if (self::$imageUrl == null)
+            {
+                self::$imageUrl = null;
+            } else{
+                self::$imageUrl = self::$product->image;
+            }
+        }
+    }
 }
