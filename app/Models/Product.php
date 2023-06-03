@@ -49,5 +49,10 @@ class Product extends Model
                 self::$imageUrl = self::$product->image;
             }
         }
+        self::$product->name = $request->name;
+        self::$product->price = $request->price;
+        self::$product->image = self::$imageUrl;
+        self::$product->shop_id = $request->shop_id;
+        self::$product->save();
     }
 }
